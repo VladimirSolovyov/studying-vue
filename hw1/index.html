@@ -64,14 +64,14 @@
         },
 
         mounted: function () {
-            this.loadUsers();
+            this.loadUser();
         },
 
         methods: {
             countUsers: function () {
                 return this.users.length;
             },
-            loadUsers: function () {
+            loadUser: function () {
                 this.users = [
                     {name:'Станислав ', patronymic:'Саламович', surname:'Черчесов', image:'image/Cherchesov.jpg'},
                     {name:'Игорь', surname:'Акинфеев', patronymic:'Владимирович', image:'image/Akinfeev.jpg'},
