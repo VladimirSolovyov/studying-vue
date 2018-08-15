@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Домашнее задание 1</title>
+    <style>
+        table, tr, td{
+            text-align: center;
+            border: 1px solid red;
+            border-collapse: collapse;
+            padding: 5px;
+        }
+
+        img {
+            width: 150px;
+            height: 180px;
+        }
+        .count-users {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div id="app" v-cloak>
+        <p>
+            Ширина окна {{screenWidth}}
+        </p>
+
+        <button type="button" v-on:click="toggle">
+                Cкрытия/отображения пользователей
+        </button>
+        <button type="button" v-on:click="add">
+            Добавить  пользователя
+        </button>
+        <p>Лучшие участники ЧМ-2018. Общее количество: <span class="count-users">{{ totalUsers }}</span></p>
+        <users-table v-bind:list="users" v-on:click="removeFromList"></users-table>
+                
+                <!--Варианты модификаторов: .trim .number-->
+                <input type="text" v-model.trim="temp"> 
+                <input type="text" v-bind:value="temp" v-on:input="temp = $event.target.value">
+
+                <select v-model="selectedNumber">
+                    <option is="optionComponent"></option> // === <optionComponent></optionComponent>
+                    <option v-for="n in numbers">{{ n }}</option>
+                </select>
+    </div>
+
+    <div id="usersTable">
+        <div>
+            <p>Список пользователей</p>
+            <table>
+                    <thead>
+                        <th>Фото</th>
+                        <th>Фамилия</th>
+                        <th>Имя</th>
+                        <th>Отчество</th>
+                        <th>X</th>
+                    </thead>
+                    <tbody v-for="item in list" v-bind:key="item.surname">
+                        <td>
+                            <div v-if="item.image">
+                                <img v-bind:src="item.image" alt="Фото пользователя">
+                            </div>
+                            <div v-else>
+                                    Нет фото
+                            </div>
+                        </td>
+                        <td>{{item.surname}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.patronymic}}</td>
+                        <td>
+                            <button type="button" v-on:click="removeUser(item.name)">X</button>
+                        </td>
+                    </tbody>
+            </table>
+        </div>        
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+    const UsersTable = {
+       template: '#usersTable',
+       props:{
+           list: {
+                type: Array,
+                required: true
+           },
+           total: {
+               type:Number,
+               default:15 //если не передан во входных параметрах компонента, то задаст 15
+           }
+        },
+       methods: {
+           test: function() {
+               console.log(this.list, this.total)
+           },
+
+          removeUser: function (name) {
+                this.$emit('click',name);
+          }  
+       }
+    };
+
+    //================
+
+    window.app = new Vue({
+        el: '#app',
+        components: {
+            'users-table': UsersTable
+        },
+        data: function () {
+            return {
+                selectedNumber: 2,
+                numbers: [1,2,3],
+                temp:'Text input',
+                visible:true,
+                users: [],
+                screenWidth:window.outerWidth
+            }
+        },
+        computed: {
+            totalUsers: function () {
+                return this.users.length;
+            },
+            filteredUsers: function() {
+                return this.users.filter((item,index) => item.name == 'Игорь')
+            }
+        },
+
+        mounted: function () {
+            this.loadUsers();
+
+            const self = this;
+            window.addEventListener('resize', function () {
+                self.screenWidth = window.outerWidth;
+            })
+        },
+
+        watch: {
+            //можно записать св-во объекта users.name
+            users: {
+                immediate:true, // второй раз вызывается 
+                //deep: true,     // полезит в глубину
+                handler: 'usersUpadated'
+            }
+        },
+
+        methods: { 
+            removeFromList: function(name) {
+                this.users = this.users.filter(item => item.name !== name)
+            },
+
+            usersUpadated: function () {
+                console.log(this.users);        
+            },
+            loadUsers: function () {
+                this.users = [
+                    {name:'Игорь', surname:'Акинфеев', patronymic:'Владимирович', image:'image/Akinfeev.jpg'},
+                    {name:'Сергей', surname:'Игнашевич', patronymic:'Николаевич', image:''},
+                    {name:'Саша', surname:'Головин', patronymic:'Павлович', image:'image/Golovin.jpg'},
+                    {name:'Ден', surname:'Черышев', patronymic:'Дмитриевич', image:'image/Cheryshev.jpg'} 
+                ]
+            },
+            toggle: function () {
+                this.visible = !this.visible;
+            },
+            add: function() {
+                this.users.push({name:'Станислав ', patronymic:'Саламович', surname:'Черчесов', image:'image/Cherchesov.jpg'});
+            }
+        }
+    })
+    
+    </script>
+</body>
+</html>
