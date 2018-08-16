@@ -9,17 +9,17 @@
       </button>
       <div id="navbarCollapse" class="collapse navbar-collapse">
         <ul class="navbar-nav mr-auto">
-          <router-link tag="nav-item" to="/">
+          <router-link tag="li" class="nav-item" to="/" exact>
             <a class="nav-link">
               Главная
             </a>
           </router-link>
-          <router-link tag="nav-item" to="/users">
+          <router-link tag="li" class="nav-item" to="/users">
             <a class="nav-link">
               Список пользователей
             </a>
           </router-link>
-          <router-link tag="nav-item" to="/add">
+          <router-link tag="li" class="nav-item" to="/add">
             <a class="nav-link">
               Добавление пользователей
             </a>
