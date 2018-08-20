@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2>Список пользователей</h2>
-
+    <p>Продолжить 09.08 41 минута(Авторизация)</p>
     <div v-if="loading" class="alert alert-warning">
       Загрузка...        
     </div>

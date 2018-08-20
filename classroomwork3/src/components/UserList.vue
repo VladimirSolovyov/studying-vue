@@ -11,7 +11,11 @@
       <th>Зарегистрирован</th>
     </thead>
     <tbody v-for="item in users" :key="item.id">
-      <td># {{ item.id }}</td>
+      <td>
+        <router-link :to="'/edit/'+ item.id"> 
+          # {{ item.id }}
+        </router-link>
+      </td>
       <td>{{ item.firstName }}</td>
       <td>{{ item.lastName }}</td>
       <td>{{ item.isActive }}</td>
