@@ -1,7 +1,6 @@
 <template>
   <div>
-    <h2>Список пользователей</h2>
-    <p>Продолжить 09.08 41 минута(Авторизация)</p>
+    <h2 class="cool">Список пользователей</h2>
     <div v-if="loading" class="alert alert-warning">
       Загрузка...        
     </div>
@@ -18,11 +17,10 @@
 </template>
 <script>
 import axios from 'axios'
-import UserList from '@/components/UserList.vue'
 
 export default {
   components: {
-    UserList
+    UserList: () => import('@/components/UserList.vue')
   },
   data: () => ({
     users: [],
@@ -47,3 +45,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.cool {
+  color: red;
+}
+</style>

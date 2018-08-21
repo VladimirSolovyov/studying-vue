@@ -29,12 +29,14 @@
     </nav>
 
     <main role="main" class="container">
+      <h2 class="cool">Заголовок из шаблона :)</h2>
+      <hr>
       <router-view/>
     </main>
   </div>
 </template>
 
-<style>
+<style scoped>
 #app {
   margin-top: 60px;
 }

@@ -1,4 +1,5 @@
 // vue.config.js
 module.exports = {
-  lintOnSave: true
+  lintOnSave: true,
+  baseUrl: process.env.NODE_ENV === 'production' ? '/my-project/' : '/'
 }
