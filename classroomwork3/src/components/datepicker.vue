@@ -16,24 +16,31 @@ export default {
       required: true
     }
   },
+  data: () => ({
+    fp: null
+  }),
   watch: {
-      value: 'updatePicker'
+    value: 'updatePicker'
   },
   mounted() {
     this.initPicker()
   },
+  beforeDestroy() {
+    this.fp.destroy()
+  },  
   methods: {
-      initPicker() {
-          const fp = flatpickr(this.$refs.input, {
-                dateFormat: 'd.m.Y',
-                onChange: (selectedDates, dateStr) => {
-                    this.$emit('input', dateStr)
-                }
-            })
-        },
-      updatePicker() {
-          fp.setDate(this.value)
-      }
+    initPicker() {
+      this.fp = flatpickr(this.$refs.input, {
+        dateFormat: 'd.m.Y',
+        onChange: (selectedDates, dateStr) => {
+          this.$emit('input', dateStr)
+        }
+      })
+    },
+
+    updatePicker() {
+      if (this.fp) this.fp.setDate(this.value)
+    }
   }
 }
 </script>

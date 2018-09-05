@@ -10,7 +10,7 @@
       <user-form v-model="user" />
 
       <button type="button" class="btn btn-primary" @click="save">
-        Сохранить
+        Сохранить - 55 minute 16.08
       </button>
 
       <pre> {{ user }}</pre>

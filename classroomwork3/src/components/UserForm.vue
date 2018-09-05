@@ -31,7 +31,7 @@
     </div>
 
     <div class="form-group">
-      <label>Дата регистрации - Закончил на 16.08 минута 36</label>
+      <label>Дата регистрации</label>
       <datepicker v-model="localUser.registered" />
     </div>
   </div>
