@@ -10,7 +10,7 @@
       <user-form v-model="user" />
 
       <button type="button" class="btn btn-primary" @click="save">
-        Сохранить - 55 minute 16.08
+        Сохранить
       </button>
 
       <pre> {{ user }}</pre>
@@ -49,6 +49,13 @@ export default {
     },
 
     save() {
+      this.$validator.validateAll()
+      if (this.errors.any()) {
+        debugger;
+        alert('Что-то не заполнено!')
+        return
+      }
+
       axios
         .patch(this.restUrl, this.user)
         .then(() => this.redirectToList())

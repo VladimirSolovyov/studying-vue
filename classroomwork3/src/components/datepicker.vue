@@ -27,7 +27,7 @@ export default {
   },
   beforeDestroy() {
     this.fp.destroy()
-  },  
+  },
   methods: {
     initPicker() {
       this.fp = flatpickr(this.$refs.input, {

@@ -1,9 +1,17 @@
 <template>
   <div>
-    <div class="form-group">
+    <!-- <div class="form-group">
       <label>Имя</label>
       <input v-model="localUser.firstName" type="text" class="form-control">
+    </div> -->
+    <div class="form-group">
+      <label>Имя</label>
+      <input v-validate="'required'" v-model="localUser.firstName" :class="{ 'is-invalid': errors.has('firstName') }" type="text" name="firstName" class="form-control">
+      <span v-show="errors.has('firstName')" class="help-block text-danger">
+        {{ errors.first('firstName') }} Мой текст :)
+      </span>
     </div>
+
 
     <div class="form-group">
       <label>Фамилия</label>
@@ -42,6 +50,7 @@ import axios from '@/axios.js'
 
 export default {
   name: 'UserForm',
+  inject: ['$validator'],
   components: {
     Datepicker: () => import('@/components/datepicker.vue')
   },
