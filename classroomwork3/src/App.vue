@@ -1,9 +1,9 @@
 <template>
-  <div id="app">   
+  <div id="app">
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
       <router-link to="/" class="navbar-brand">
-        Vue cli app
-      </router-link> 
+        {{ title }}
+      </router-link>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"/>
       </button>
@@ -35,6 +35,17 @@
     </main>
   </div>
 </template>
+
+<script>
+export default {
+  name: 'App',
+  computed: {
+    title() {
+      return this.$store.state.navbarTitle
+    }
+  }
+}
+</script>
 
 <style scoped>
 #app {

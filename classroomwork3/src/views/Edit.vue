@@ -51,7 +51,7 @@ export default {
     save() {
       this.$validator.validateAll()
       if (this.errors.any()) {
-        debugger;
+        debugger
         alert('Что-то не заполнено!')
         return
       }
