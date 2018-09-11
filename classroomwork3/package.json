@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --modern",
     "lint": "vue-cli-service lint",
-    "fake": "json-server --watch db.json"
+    "fake": "json-server --watch db.json",
+    "test": "vue-cli-service test:unit"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -21,10 +22,23 @@
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.0",
     "@vue/cli-plugin-eslint": "^3.0.0",
+    "@vue/cli-plugin-unit-jest": "^3.0.1",
     "@vue/cli-service": "^3.0.0",
     "@vue/eslint-config-prettier": "^3.0.0",
+    "@vue/test-utils": "^1.0.0-beta.20",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-jest": "^23.0.1",
     "lint-staged": "^7.2.0",
     "vue-template-compiler": "^2.5.17"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "tabWidth": 2,
+    "useTabs": false,
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "none",
+    "bracketSpacing": true
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
@@ -38,14 +52,5 @@
       "vue-cli-service lint",
       "git add"
     ]
-  },
-  "prettier": {
-    "printWidth": 100,
-    "tabWidth": 2,
-    "useTabs": false,
-    "semi": false,
-    "singleQuote": true,
-    "trailingComma": "none",
-    "bracketSpacing": true
   }
 }
